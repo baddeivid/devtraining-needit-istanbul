@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record_update sys_domain="global" table="sys_script_client">
+    <sys_script_client action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <applies_extended>false</applies_extended>
+        <condition/>
+        <description>Set the Requested for to the currently logged in user for new records. Users can change the field value</description>
+        <field>active</field>
+        <global>true</global>
+        <messages/>
+        <name>NeedIt Set Requested for</name>
+        <order/>
+        <script><![CDATA[function onLoad() {
+	//New record
+	if(g_form.isNewRecord()){
+		//console.log("#### NeedIt Set Requested for - Logged in user ID:" + g_user.userID);
+		g_form.setValue('u_requested_for', g_user.userID);
+	}
+	else{
+		var requestor = g_form.getReference('u_requested_for', getCaller);
+	}
+	
+}
+
+function getCaller(requestor){
+	
+	//reference is passed into callback as first arguments
+	var requestorName = requestor.first_name;
+	
+	jslog("NeedIt Set Requested for #### This message is from jslog().");
+	jslog("NeedIt Set Requested for #### The value of Requested for is " + requestorName + " - which ID is : " + g_form.getValue('u_requested_for'));
+	jslog("NeedIt Set Requested for #### The NeedIt State is " + g_form.getValue('state'));
+	jslog("NeedIt Set Requested for #### The currently logged in user is " + g_user.getFullName() + ".");
+	
+}]]></script>
+        <sys_class_name>sys_script_client</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2017-10-29 21:04:01</sys_created_on>
+        <sys_customer_update>true</sys_customer_update>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>18a30fa2db4a03007885771c8c96195e</sys_id>
+        <sys_mod_count>7</sys_mod_count>
+        <sys_name>NeedIt Set Requested for</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_replace_on_upgrade>false</sys_replace_on_upgrade>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_script_client_18a30fa2db4a03007885771c8c96195e</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2017-11-05 14:42:11</sys_updated_on>
+        <table>x_58872_needit_needit</table>
+        <type>onLoad</type>
+        <ui_type>10</ui_type>
+        <view/>
+    </sys_script_client>
+</record_update>
